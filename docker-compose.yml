@@ -1,9 +1,27 @@
 version: '3.1'
 
+networks:
+  server:
+
 services:
-  v2ray:
-    build: ./v2ray
-    container_name: v2ray
-    ports:
-      - "8080:8080"
+  # v2ray:
+  #   build: ./v2ray
+  #   container_name: v2ray
+  #   ports:
+  #     - "8080:8080"
+  #   restart: always
+
+  # nginx 服务配置
+  nginx:
+    build: ./nginx
     restart: always
+    networks: 
+      - server
+    volumes: 
+      # Dockerfile中不支持这种挂载方式
+      # 挂载www目录
+      - ./nginx/www:/var/www/demo
+      # 挂载nginx log目录
+      - ./nginx/log:/var/log/nginx
+    ports:
+      - "80:80"
