@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   v2ray:
-    image: v2ray/official
+    build: ./v2ray
     container_name: v2ray
     ports:
       - "8080:8080"
